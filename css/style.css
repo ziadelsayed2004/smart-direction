@@ -603,6 +603,7 @@ a:focus {
     margin: 0 auto;
     text-align: center;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .carousel .carousel-inner,
@@ -616,6 +617,12 @@ a:focus {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.1);
+    transition: transform 6s ease-in-out;
+}
+
+.carousel .carousel-item.active img {
+    transform: scale(1);
 }
 
 .carousel .carousel-item::after {
@@ -625,7 +632,7 @@ a:focus {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, .3);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
     z-index: 1;
 }
 
@@ -639,6 +646,7 @@ a:focus {
     flex-direction: column;
     height: calc(100vh - 170px);
     min-height: 400px;
+    z-index: 2;
 }
 
 .carousel .carousel-caption p {
@@ -646,6 +654,15 @@ a:focus {
     font-size: 30px;
     margin-bottom: 15px;
     letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.carousel .carousel-item.active .carousel-caption p {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .carousel .carousel-caption h1 {
@@ -653,6 +670,15 @@ a:focus {
     font-size: 60px;
     font-weight: 700;
     margin-bottom: 35px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out 0.2s;
+}
+
+.carousel .carousel-item.active .carousel-caption h1 {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .carousel .carousel-caption .btn {
@@ -673,6 +699,48 @@ a:focus {
     background: var(--primary);
     border: 2px solid #ffffff;
     scale: 1.05;
+}
+
+.carousel .carousel-control-prev,
+.carousel .carousel-control-next {
+    width: 30px;
+    height: 30px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 10px;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+    opacity: 1;
+}
+
+.carousel .carousel-control-prev:hover,
+.carousel .carousel-control-next:hover {
+    background: var(--primary);
+    scale: 1.05;
+}
+
+.carousel .carousel-indicators {
+    bottom: 40px;
+}
+
+.carousel .carousel-indicators li {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: all 0.5s ease-in-out;
+}
+
+.carousel .carousel-indicators li.active {
+    background-color: var(--primary);
+    transform: scale(1.2);
 }
 
 @media (max-width: 767.98px) {
