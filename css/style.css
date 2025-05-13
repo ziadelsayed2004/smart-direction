@@ -1627,7 +1627,6 @@ body.rtl .about-img .next {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    border-radius: 0 0 25px 25px;
 }
 
 .blog .blog-title h3 {
@@ -1657,7 +1656,7 @@ body.rtl .about-img .next {
     font-weight: 250;
     color: var(--accent);
     background: var(--primary);
-     border-radius: var(--border-radius);
+    border-radius: var(--border-radius);
     transition: all 0.5s ease-in-out;
     text-align: center;
 }
@@ -1668,8 +1667,8 @@ body.rtl .about-img .next {
 
 .blog .blog-meta {
     position: relative;
-    padding: 25px 0 10px 0;
-    background: var(--background);
+    padding: 25px 15px 10px 15px;
+    background-color: var(--accent);
 }
 
 .blog .blog-meta::after {
@@ -1699,7 +1698,8 @@ body.rtl .about-img .next {
 
 .blog .blog-text {
     padding: 10px 25px 25px 25px;
-    background: var(--background);
+    background-color: var(--accent);
+    color: var(--white);
     border-radius: 0 0 25px 25px;
 }
 
