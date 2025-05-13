@@ -49,10 +49,43 @@
     window.addEventListener('scroll', function() {
         const navBar = document.querySelector('.nav-bar');
         if (!navBar) return;
-        if (window.scrollY > 100) {
+        
+        // Add transition properties to nav-bar with smoother timing
+        navBar.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        if (window.scrollY > 120) {
             navBar.classList.add('nav-sticky');
+            // Smooth fade in with transform
+            requestAnimationFrame(() => {
+                navBar.style.transform = 'translateY(0)';
+                navBar.style.opacity = '1';
+                navBar.style.visibility = 'visible';
+            });
         } else {
             navBar.classList.remove('nav-sticky');
+            
+            // Check if we're at the very top or near top
+            if (window.scrollY === 0 || window.scrollY <= 120) {
+                // Smooth return to original state
+                requestAnimationFrame(() => {
+                    navBar.style.transform = 'translateY(0)';
+                    navBar.style.opacity = '1';
+                    navBar.style.visibility = 'visible';
+                });
+            } else {
+                // Smooth fade out with transform
+                requestAnimationFrame(() => {
+                    navBar.style.transform = 'translateY(-15px)';
+                    navBar.style.opacity = '0';
+                });
+                
+                // Only hide after fade out is complete
+                setTimeout(() => {
+                    if (window.scrollY > 0 && window.scrollY <= 120) {
+                        navBar.style.visibility = 'hidden';
+                    }
+                }, 500);
+            }
         }
     });
     
@@ -181,89 +214,90 @@
 })(jQuery);
 
 { // NAV CLICK
-    document.getElementById('menu-toggle').addEventListener('click', function () {
-        this.classList.toggle('active');
+    $('#menu-toggle').on('click', function() {
+        $(this).toggleClass('active');
     });
     
     
 }
 
 { // TAP CLICK
-document.querySelectorAll('.service-item').forEach(item => {
-    const tapIcon = item.querySelector('.tap-indicator');
-  
-    item.addEventListener('click', () => {
-      if (tapIcon) tapIcon.style.display = 'none';
+$('.service-item').each(function() {
+    const $item = $(this);
+    const $tapIcon = $item.find('.tap-indicator');
+    
+    $item.on('click', function() {
+        if ($tapIcon.length) $tapIcon.hide();
     });
-  
-    item.addEventListener('mouseenter', () => {
-      if (tapIcon) tapIcon.style.display = 'none';
+    
+    $item.on('mouseenter', function() {
+        if ($tapIcon.length) $tapIcon.hide();
     });
-  
-    item.addEventListener('mouseleave', () => {
-      if (tapIcon) tapIcon.style.display = 'block';
+    
+    $item.on('mouseleave', function() {
+        if ($tapIcon.length) $tapIcon.show();
     });
 });
 }
 
 { // ISO SLIDER
-    const slidesWrapper = document.querySelector('.about-img .slides-wrapper');
-    const slides = document.querySelectorAll('.about-img .slide');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    const isRTL = document.body.classList.contains('rtl');
+    const $slidesWrapper = $('.about-img .slides-wrapper');
+    const $slides = $('.about-img .slide');
+    const $prevBtn = $('.prev');
+    const $nextBtn = $('.next');
+    const isRTL = $('body').hasClass('rtl');
     
     let currentIndex = 0;
     let interval;
     
     function showSlide(index) {
-      if (index >= slides.length) index = 0;  
-      if (index < 0) index = slides.length - 1; 
-      currentIndex = index;
-      const offset = -index * 100; 
-      slidesWrapper.style.transform = `translateX(${isRTL ? -offset : offset}%)`;
+        if (index >= $slides.length) index = 0;  
+        if (index < 0) index = $slides.length - 1; 
+        currentIndex = index;
+        const offset = -index * 100; 
+        $slidesWrapper.css('transform', `translateX(${isRTL ? -offset : offset}%)`);
     }
     
     function nextSlide() {
         if(currentIndex === 2) {  
             showSlide(0); 
-          } else {
+        } else {
             showSlide(currentIndex + 1); 
-          }
+        }
     }
     
     function prevSlide() {
         if(currentIndex === 0) { 
             showSlide(2);
-          } else {
+        } else {
             showSlide(currentIndex - 1);
-          }    
+        }    
     }
     
     function startAutoplay() {
-      interval = setInterval(() => {
-        if(currentIndex === 2) {  
-          showSlide(0);
-        } else {
-          showSlide(currentIndex + 1); 
-        }
-      }, 2500); 
+        interval = setInterval(() => {
+            if(currentIndex === 2) {  
+                showSlide(0);
+            } else {
+                showSlide(currentIndex + 1); 
+            }
+        }, 2500); 
     }
     
     function stopAutoplay() {
-      clearInterval(interval);
+        clearInterval(interval);
     }
     
-    nextBtn.addEventListener('click', () => {
-      stopAutoplay();  
-      nextSlide();     
-      startAutoplay(); 
+    $nextBtn.on('click', function() {
+        stopAutoplay();  
+        nextSlide();     
+        startAutoplay(); 
     });
     
-    prevBtn.addEventListener('click', () => {
-      stopAutoplay();  
-      prevSlide();    
-      startAutoplay();
+    $prevBtn.on('click', function() {
+        stopAutoplay();  
+        prevSlide();    
+        startAutoplay();
     });
     
     showSlide(0);       
@@ -272,26 +306,26 @@ document.querySelectorAll('.service-item').forEach(item => {
 }
 
 { // PARTNERS SLIDER 
-    const container = document.getElementById('sliderContainer');
-    const track = document.getElementById('sliderTrack');
+    const $container = $('#sliderContainer');
+    const $track = $('#sliderTrack');
     let isDown = false;
     let startX;
     let scrollLeft;
     let scrollSpeed = 2;
-    const isRTL = getComputedStyle(container).direction === 'rtl';
+    const isRTL = $container.css('direction') === 'rtl';
     
     let autoScroll;
     
     function startAutoScroll() {
         if (autoScroll) return;
         autoScroll = setInterval(() => {
-            container.scrollLeft += isRTL ? -scrollSpeed : scrollSpeed;
-            const maxScroll = track.scrollWidth / 2;
+            $container.scrollLeft($container.scrollLeft() + (isRTL ? -scrollSpeed : scrollSpeed));
+            const maxScroll = $track.width() / 2;
     
-            if (!isRTL && container.scrollLeft >= maxScroll) {
-                container.scrollLeft = 0;
-            } else if (isRTL && container.scrollLeft <= 0) {
-                container.scrollLeft = maxScroll;
+            if (!isRTL && $container.scrollLeft() >= maxScroll) {
+                $container.scrollLeft(0);
+            } else if (isRTL && $container.scrollLeft() <= 0) {
+                $container.scrollLeft(maxScroll);
             }
         }, 16);
     }
@@ -301,49 +335,50 @@ document.querySelectorAll('.service-item').forEach(item => {
         autoScroll = null;
     }
     
-    container.addEventListener('mousedown', (e) => {
+    $container.on('mousedown', function(e) {
         isDown = true;
         scrollSpeed = 1.5;
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
+        startX = e.pageX - $container.offset().left;
+        scrollLeft = $container.scrollLeft();
     });
-    container.addEventListener('mouseup', () => {
+    
+    $container.on('mouseup mouseleave', function() {
         isDown = false;
         scrollSpeed = 2;
     });
-    container.addEventListener('mouseleave', () => {
-        isDown = false;
-        scrollSpeed = 2;
-    });
-    container.addEventListener('mousemove', (e) => {
+    
+    $container.on('mousemove', function(e) {
         if (!isDown) return;
         e.preventDefault();
-        const x = e.pageX - container.offsetLeft;
+        const x = e.pageX - $container.offset().left;
         const walk = (x - startX) * 1.5;
-        container.scrollLeft = scrollLeft - walk;
+        $container.scrollLeft(scrollLeft - walk);
     });
     
-    container.addEventListener('touchstart', (e) => {
+    $container.on('touchstart', function(e) {
         isDown = true;
         scrollSpeed = 1.5;
-        startX = e.touches[0].pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
+        startX = e.touches[0].pageX - $container.offset().left;
+        scrollLeft = $container.scrollLeft();
     });
-    container.addEventListener('touchend', () => {
+    
+    $container.on('touchend', function() {
         isDown = false;
         scrollSpeed = 2;
     });
-    container.addEventListener('touchmove', (e) => {
+    
+    $container.on('touchmove', function(e) {
         if (!isDown) return;
-        const x = e.touches[0].pageX - container.offsetLeft;
+        const x = e.touches[0].pageX - $container.offset().left;
         const walk = (x - startX) * 1.5;
-        container.scrollLeft = scrollLeft - walk;
+        $container.scrollLeft(scrollLeft - walk);
     });
     
-    container.addEventListener('mouseenter', () => {
+    $container.on('mouseenter', function() {
         scrollSpeed = 1;
     });
-    container.addEventListener('mouseleave', () => {
+    
+    $container.on('mouseleave', function() {
         scrollSpeed = 2;
     });
     
@@ -351,42 +386,20 @@ document.querySelectorAll('.service-item').forEach(item => {
 }
     
 { //TOGGLE ?
-    document.addEventListener('DOMContentLoaded', function () {
-        const buttons = document.querySelectorAll('.toggle-overlay');
+    $(document).ready(function() {
+        $('.toggle-overlay').on('click', function() {
+            const $container = $(this).closest('.service-item, .portfolio-item');
+            const overlaySelector = $container.hasClass('service-item') ? '.service-overlay' : '.portfolio-overlay';
+            const $overlay = $container.find(overlaySelector);
+            const isActive = $overlay.hasClass('active');
     
-        buttons.forEach(button => {
-            button.addEventListener('click', function () {
-                let container, overlaySelector;
+            $(overlaySelector).removeClass('active');
+            $('.toggle-overlay i').removeClass('fa-circle-xmark').addClass('fa-info');
     
-                if (this.closest('.service-item')) {
-                    container = this.closest('.service-item');
-                    overlaySelector = '.service-overlay';
-                } else if (this.closest('.portfolio-item')) {
-                    container = this.closest('.portfolio-item');
-                    overlaySelector = '.portfolio-overlay';
-                } else {
-                    return;
-                }
-    
-                const overlay = container.querySelector(overlaySelector);
-                const isActive = overlay.classList.contains('active');
-    
-                document.querySelectorAll(overlaySelector).forEach(o => {
-                    o.classList.remove('active');
-                });
-    
-                document.querySelectorAll('.toggle-overlay i').forEach(icon => {
-                    icon.className = 'fas fa-info';
-                });
-    
-                if (!isActive) {
-                    overlay.classList.add('active');
-                    const icon = this.querySelector('i');
-                    if (icon) {
-                        icon.className = 'fa-solid fa-circle-xmark';
-                    }
-                }
-            });
+            if (!isActive) {
+                $overlay.addClass('active');
+                $(this).find('i').removeClass('fa-info').addClass('fa-circle-xmark');
+            }
         });
     });
     
@@ -395,9 +408,8 @@ document.querySelectorAll('.service-item').forEach(item => {
 { // VIDEO
     let player;
     let lastTime = 0;
-    const btnPlay = document.querySelector(".btn-play");
-    const videoWrapper = document.querySelector(".embed-responsive");
-
+    const $btnPlay = $(".btn-play");
+    const $videoWrapper = $(".embed-responsive");
     let userIsSeeking = false;
 
     function onYouTubeIframeAPIReady() {
@@ -416,13 +428,11 @@ document.querySelectorAll('.service-item').forEach(item => {
                 disablekb: 0
             },
             events: {
-                onReady: function (event) {
-                    // Do nothing on ready
-                },
-                onStateChange: function (event) {
+                onReady: function() {},
+                onStateChange: function(event) {
                     if (event.data === YT.PlayerState.ENDED) {
-                        videoWrapper.style.display = "none";
-                        btnPlay.style.display = "inline-block";
+                        $videoWrapper.hide();
+                        $btnPlay.show();
                     }
                 }
             }
@@ -435,9 +445,9 @@ document.querySelectorAll('.service-item').forEach(item => {
     document.head.appendChild(tag);
 
     // Play Button
-    btnPlay.addEventListener("click", function () {
-        videoWrapper.style.display = "block";
-        btnPlay.style.display = "none";
+    $btnPlay.on("click", function() {
+        $videoWrapper.show();
+        $btnPlay.hide();
 
         if (player && player.playVideo) {
             player.seekTo(lastTime);
@@ -463,8 +473,8 @@ document.querySelectorAll('.service-item').forEach(item => {
     
             if (state === YT.PlayerState.PAUSED && !userIsSeeking) {
                 lastTime = currentTime;
-                videoWrapper.style.display = "none";
-                btnPlay.style.display = "inline-block";
+                $videoWrapper.hide();
+                $btnPlay.show();
             }
         }
     }, 500);
@@ -472,167 +482,36 @@ document.querySelectorAll('.service-item').forEach(item => {
     // Detect seeking (click or touch)
     const startSeeking = () => {
         userIsSeeking = true;
-        setTimeout(() => userIsSeeking = false, 1000); // short buffer time to prevent hiding
+        setTimeout(() => userIsSeeking = false, 1000);
     };
 
-    document.addEventListener('mousedown', (e) => {
-        if (e.target.closest('#yt-player')) {
-            startSeeking();
-        }
-    });
-
-    document.addEventListener('touchstart', (e) => {
-        if (e.target.closest('#yt-player')) {
-            startSeeking();
-        }
+    $(document).on('mousedown touchstart', '#yt-player', function() {
+        startSeeking();
     });
 }
 
-// Preloader logic
-window.addEventListener('load', function() {
-  var preloader = document.getElementById('preloader');
-  // Prevent scrolling while preloader is visible
-  if (preloader) {
-    document.body.style.overflow = 'hidden';
-  }
-  function startAnimationsAndCarousels() {
-    // Initiate the wowjs
-    new WOW().init();
-
-    // Back to top button
-    $(function () {
-      const $backToTop = $('.back-to-top');
-      const $circle = document.querySelector('.progress-ring__circle');
-      const radius = $circle.r.baseVal.value;
-      const circumference = 2 * Math.PI * radius;
-      $circle.style.strokeDasharray = `${circumference} ${circumference}`;
-      $circle.style.strokeDashoffset = circumference;
-      function setProgress(percent) {
-        const offset = circumference - (percent / 100) * circumference;
-        $circle.style.strokeDashoffset = offset;
-      }
-      $(window).on('scroll', function () {
-        const scrollTop = $(this).scrollTop();
-        const docHeight = $(document).height();
-        const winHeight = $(window).height();
-        const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
-        if (scrollTop > 200) {
-          $backToTop.fadeIn('slow');
-        } else {
-          $backToTop.fadeOut('slow');
-        }
-        setProgress(scrollPercent);
-      });
-      $backToTop.on('click', function (e) {
-        e.preventDefault();
-        $('html, body').animate({ scrollTop: 0 }, 1000, 'swing');
-      });
-    });
-
-    // Modal Video
-    $(function () {
-      var $videoSrc;
-      $('.btn-play').click(function () {
-        $videoSrc = $(this).data("src");
-      });
-      $('#videoModal').on('shown.bs.modal', function (e) {
-        $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
-      });
-      $('#videoModal').on('hide.bs.modal', function (e) {
-        $("#video").attr('src', $videoSrc);
-      });
-    });
-
-    // Blogs carousel
-    $(function () {
-      var isRtl = $("body").hasClass("rtl");
-      $(".related-slider").owlCarousel({
-        autoplay: true,
-        loop: true,
-        dots: false,
-        nav: true,
-        rtl: isRtl,
-        navText: isRtl
-          ? [
-            '<i class="fa fa-angle-right" aria-hidden="true"></i>',
-            '<i class="fa fa-angle-left" aria-hidden="true"></i>'
-          ]
-          : [
-            '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-            '<i class="fa fa-angle-right" aria-hidden="true"></i>'
-          ],
-        responsive: {
-          0: { items: 1 },
-          576: { items: 1 },
-          768: { items: 2 }
-        }
-      });
-    });
-
-    // Portfolio Isotope
-    $(function () {
-      var itemsToShow = 3;
-      var currentFilter = '*';
-      var $container = $('.portfolio-container');
-      var $btn = $('.load-more .btn');
-      var isExpanded = false;
-      var portfolioIsotope = $container.isotope({
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows'
-      });
-      function showItems(filter, expand = false) {
-        var $allItems = $container.find('.portfolio-item');
-        var $filteredItems = (filter === '*') ? $allItems : $allItems.filter(filter);
-        if (expand) {
-          $allItems.hide();
-          $filteredItems.show();
-          $btn.text('View Less');
-          isExpanded = true;
-        } else {
-          $allItems.hide();
-          $filteredItems.slice(0, itemsToShow).show();
-          if ($filteredItems.length <= itemsToShow) {
-            $btn.hide();
-          } else {
-            $btn.show().text('Load More');
-          }
-          isExpanded = false;
-        }
-        portfolioIsotope.isotope('layout');
-      }
-      $('#portfolio-flters li').on('click', function () {
-        $('#portfolio-flters li').removeClass('filter-active');
-        $(this).addClass('filter-active');
-        currentFilter = $(this).data('filter');
-        showItems(currentFilter, false);
-      });
-      $btn.on('click', function (e) {
-        e.preventDefault();
-        if (isExpanded) {
-          showItems(currentFilter, false);
-        } else {
-          showItems(currentFilter, true);
-        }
-      });
-      showItems(currentFilter);
-    });
-
-    // Collapse logic
-    $('.collapse').on('show.bs.collapse', function () {
-      $('.collapse').not(this).collapse('hide');
-    });
-  }
-  if (preloader) {
-    preloader.style.transition = 'opacity 0.6s cubic-bezier(.4,0,.2,1)';
-    preloader.style.opacity = '0';
-    setTimeout(function() {
-      preloader.style.display = 'none';
-      // Restore scrolling after preloader is hidden
-      document.body.style.overflow = '';
-      startAnimationsAndCarousels();
-    }, 1000);
-  } else {
-    document.body.style.overflow = '';
-    startAnimationsAndCarousels();
-  }
+// Isolated Preloader
+$(document).ready(function() {
+    const preloader = document.getElementById('preloader');
+    
+    if (preloader) {
+        // Set initial styles
+        preloader.style.transition = 'all 0.8s cubic-bezier(.4,0,.2,1)';
+        preloader.style.opacity = '1';
+        preloader.style.transform = 'scale(1)';
+        
+        // Force a reflow to ensure the transition works
+        preloader.offsetHeight;
+        
+        // Start the fade out after a delay
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            preloader.style.transform = 'scale(1.1)';
+            
+            // Remove preloader after animation completes
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 800);
+        }, 500);
+    }
 });
