@@ -814,6 +814,7 @@ a:focus {
         flex-direction: column;
         justify-content: space-between;
         gap: 2%;
+        width: auto;
     }
     
 }
