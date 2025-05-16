@@ -755,6 +755,9 @@ a:focus {
         width: 92.5%;
         height: calc(100vh - 275px);
     }
+    .carousel .carousel-caption{
+        height: calc(100vh - 275px);
+    }
 }
 
 @media (max-width: 767.98px) {
