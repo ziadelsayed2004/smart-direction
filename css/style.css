@@ -1210,7 +1210,8 @@ body.rtl .about-img .next {
 /*******************************/
 .fact {
     position: relative;
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     padding: 45px 0;
 }
 
@@ -1247,6 +1248,24 @@ body.rtl .about-img .next {
     padding-top: 60px;
     padding-bottom: 60px;
 }
+
+.fact .fact-left{
+    border-radius: 16px 0 0 16px;
+}
+
+.fact .fact-right{
+    border-radius: 0 16px 16px 0;
+}
+
+body.rtl .fact .fact-left{
+    border-radius: 0 16px 16px 0;
+}
+
+body.rtl .fact .fact-right{
+    border-radius: 16px 0 0 16px;
+}
+
+
 
 .fact .fact-text h2 {
     font-size: 30px;
