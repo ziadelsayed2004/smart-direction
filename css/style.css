@@ -553,7 +553,7 @@ a:focus {
     .lang-toggle{
         margin-top: 15px;
     }
-    
+
     .nav-bar .navbar {
         padding: 15px;
     }
@@ -603,8 +603,9 @@ a:focus {
 /*******************************/
 .carousel {
     position: relative;
-    width: 100%;
-    height: calc(100vh - 237.5px);
+    width: 97.5%;
+    border-radius: var(--border-radius);
+    height: calc(100vh - 250px);
     min-height: 400px;
     margin: 0 auto;
     text-align: center;
@@ -747,6 +748,12 @@ a:focus {
 .carousel .carousel-indicators li.active {
     background-color: var(--primary);
     transform: scale(1.2);
+}
+
+@media (max-width: 991.98px) {
+    .carousel {
+        width: 92.5%;
+    }
 }
 
 @media (max-width: 767.98px) {
