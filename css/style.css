@@ -290,7 +290,7 @@ a:focus {
 }
 
 .top-bar .logo img {
-    scale: 1.5;
+    scale: 1.25;
     max-height: 90px;
 }
 
@@ -380,7 +380,7 @@ a:focus {
     }
     
     .top-bar .logo img {
-        scale: 1.4;
+        scale: 1.5;
     }
     
     .top-bar .top-bar-item {
