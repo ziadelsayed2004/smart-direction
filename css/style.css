@@ -550,6 +550,10 @@ a:focus {
 }
 
 @media (max-width: 991.98px) {
+    .lang-toggle{
+        margin-top: 15px;
+    }
+    
     .nav-bar .navbar {
         padding: 15px;
     }
@@ -568,6 +572,7 @@ a:focus {
         transform: scaleX(0);
         transform-origin: left;
     }
+
     body.rtl .nav-bar .navbar-nav .nav-link::after {
         left: unset;
         right: 0;
@@ -599,7 +604,7 @@ a:focus {
 .carousel {
     position: relative;
     width: 100%;
-    height: calc(100vh - 235px);
+    height: calc(100vh - 237.5px);
     min-height: 400px;
     margin: 0 auto;
     text-align: center;
@@ -645,7 +650,7 @@ a:focus {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: calc(100vh - 235px);
+    height: calc(100vh - 250px);
     min-height: 400px;
     z-index: 2;
 }
