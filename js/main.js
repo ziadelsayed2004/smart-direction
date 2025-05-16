@@ -1,6 +1,63 @@
 (function ($) {
     "use strict";
     
+    // Enable lazy loading for all images
+    function enableLazyLoading() {
+        // Get all images except those in the preloader
+        const images = document.querySelectorAll('img:not(.preloader-logo),(.portfolio-item)');
+        
+        // Create an Intersection Observer
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    
+                    // Load the image
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
+                    
+                    // Add loaded class when image is loaded
+                    img.onload = function() {
+                        img.classList.add('loaded');
+                        img.style.filter = 'blur(0)';
+                    };
+                    
+                    // Stop observing this image
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+        
+        // Observe each image
+        images.forEach(img => {
+            // Store original src in data-src
+            if (img.src) {
+                img.dataset.src = img.src;
+                // Set a tiny placeholder
+                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+            }
+            
+            // Add loading="lazy" attribute
+            img.setAttribute('loading', 'lazy');
+            
+            // Add initial blur effect
+            img.style.transition = 'filter 0.3s ease-in-out';
+            img.style.filter = 'blur(10px)';
+            
+            // Start observing
+            imageObserver.observe(img);
+        });
+    }
+    
+    // Call the function when DOM is ready
+    $(document).ready(function() {
+        enableLazyLoading();
+    });
+    
     // Initiate the wowjs
     new WOW().init();
     
