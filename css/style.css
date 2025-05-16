@@ -753,6 +753,7 @@ a:focus {
 @media (max-width: 991.98px) {
     .carousel {
         width: 92.5%;
+        height: calc(100vh - 275px);
     }
 }
 
