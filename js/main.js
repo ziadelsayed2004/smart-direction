@@ -51,7 +51,7 @@
         if (!navBar) return;
         
         // Add transition properties to nav-bar with smoother timing
-        navBar.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        navBar.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
         
         if (window.scrollY > 120) {
             navBar.classList.add('nav-sticky');
@@ -75,7 +75,7 @@
             } else {
                 // Smooth fade out with transform
                 requestAnimationFrame(() => {
-                    navBar.style.transform = 'translateY(-15px)';
+                    navBar.style.transform = 'translateY(-10px)';
                     navBar.style.opacity = '0';
                 });
                 
@@ -84,7 +84,7 @@
                     if (window.scrollY > 0 && window.scrollY <= 120) {
                         navBar.style.visibility = 'hidden';
                     }
-                }, 500);
+                }, 800);
             }
         }
     });

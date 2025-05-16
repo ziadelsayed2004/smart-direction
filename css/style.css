@@ -407,7 +407,7 @@ a:focus {
 }
 
 .nav-bar .container-fluid {
-    padding: 0px;
+    padding: 8px;
 }
 
 .nav-bar.nav-sticky {
@@ -598,7 +598,7 @@ a:focus {
 .carousel {
     position: relative;
     width: 100%;
-    height: calc(100vh - 170px);
+    height: calc(100vh - 235px);
     min-height: 400px;
     margin: 0 auto;
     text-align: center;
@@ -644,7 +644,7 @@ a:focus {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: calc(100vh - 170px);
+    height: calc(100vh - 235px);
     min-height: 400px;
     z-index: 2;
 }
@@ -726,7 +726,7 @@ a:focus {
 }
 
 .carousel .carousel-indicators {
-    bottom: 40px;
+    bottom: 10px;
 }
 
 .carousel .carousel-indicators li {
