@@ -212,7 +212,7 @@ a:focus {
     font-size: 30px;
     align-content: center;
     right: 2.5%;
-    bottom: 125px;
+    bottom: 135px;
     z-index: 9;
     border-radius: 50%;
     transition: all 0.5s ease-in-out;
@@ -221,7 +221,8 @@ a:focus {
 
 @media (max-width: 991.98px) {
     .back-to-top {
-        bottom: 95px;
+        bottom: 110px;
+        right: 4.5%;
     }
 }
 
