@@ -228,7 +228,7 @@ a:focus {
 .back-to-top svg.progress-ring {
     position: absolute;
     top: -4.75px;
-    left: -5px;
+    left: -4.75px;
     padding: auto;
     margin: 0;
     transform: rotate(-90deg);
@@ -236,14 +236,14 @@ a:focus {
 }
 
 .progress-ring__circle {
-    transition: stroke-dashoffset 0.3s;
+    transition: stroke-dashoffset 0.5s;
     stroke-linecap: round;
 }
 
 .back-to-top i {
     position: relative;
     z-index: 1;
-    transition: ease-in-out 0.3s;
+    transition: ease-in-out 0.5s;
 }
 .back-to-top i:hover {
     color: white;
@@ -251,7 +251,7 @@ a:focus {
 
 
 .btn {
-    transition: .3s;
+    transition: ease-in-out all 0.5s;
 }
 
 .button, .btn {

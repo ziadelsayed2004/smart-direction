@@ -51,42 +51,65 @@
         if (!navBar) return;
         
         // Add transition properties to nav-bar with smoother timing
-        navBar.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+        navBar.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        
+        let lastScrollY = window.scrollY;
+        let animationFrame;
+        
+        function animateNavBar(targetY, startY, duration = 600) {
+            const startTime = performance.now();
+            
+            function updateNavBar(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Smoother easing function for natural animation
+                const easeProgress = progress < 0.5
+                    ? 3 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                
+                const currentY = startY + (targetY - startY) * easeProgress;
+                
+                navBar.style.transform = `translateY(${currentY}px)`;
+                
+                if (progress < 1) {
+                    animationFrame = requestAnimationFrame(updateNavBar);
+                }
+            }
+            
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+            animationFrame = requestAnimationFrame(updateNavBar);
+        }
         
         if (window.scrollY > 120) {
             navBar.classList.add('nav-sticky');
-            // Smooth fade in with transform
-            requestAnimationFrame(() => {
-                navBar.style.transform = 'translateY(0)';
-                navBar.style.opacity = '1';
-                navBar.style.visibility = 'visible';
-            });
+            animateNavBar(0, -10);
+            navBar.style.opacity = '1';
+            navBar.style.visibility = 'visible';
         } else {
             navBar.classList.remove('nav-sticky');
             
-            // Check if we're at the very top or near top
             if (window.scrollY === 0 || window.scrollY <= 120) {
-                // Smooth return to original state
-                requestAnimationFrame(() => {
-                    navBar.style.transform = 'translateY(0)';
-                    navBar.style.opacity = '1';
-                    navBar.style.visibility = 'visible';
-                });
+                const currentY = parseInt(navBar.style.transform.replace('translateY(', '').replace('px)', '')) || 0;
+                animateNavBar(0, currentY);
+                navBar.style.opacity = '1';
+                navBar.style.visibility = 'visible';
             } else {
-                // Smooth fade out with transform
-                requestAnimationFrame(() => {
-                    navBar.style.transform = 'translateY(-10px)';
-                    navBar.style.opacity = '0';
-                });
+                const currentY = parseInt(navBar.style.transform.replace('translateY(', '').replace('px)', '')) || 0;
+                animateNavBar(-10, currentY);
+                navBar.style.opacity = '0';
                 
-                // Only hide after fade out is complete
                 setTimeout(() => {
                     if (window.scrollY > 0 && window.scrollY <= 120) {
                         navBar.style.visibility = 'hidden';
                     }
-                }, 800);
+                }, 600);
             }
         }
+        
+        lastScrollY = window.scrollY;
     });
     
     
