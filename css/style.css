@@ -677,14 +677,17 @@ a:focus {
     .nav-bar .navbar {
         justify-content: space-between;
         padding: 7.5px 15px;
+        margin: 0;
         box-shadow: none !important;
         background: linear-gradient(to top, var(--primary-transparent-l1) ,var(--primary-transparent-l2), var(--primary-transparent-l3), var(--primary-transparent-l4), var(--primary-transparent-l5), var(--white)) !important;
     }
     
-    .nav-bar.nav-sticky{
-        background-color: var(--white);
+    .nav-bar .container-fluid-sticky{
+        padding: 0;
+        margin: 10px 1%;
         box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        border-radius: var(--border-radius);
+        background-color: var(--white);
     }
 
     .bar {
@@ -1185,7 +1188,6 @@ a:focus {
 
 .section-header h2:hover:not(.about .section-header h2) {
     font-weight: bold;
-    -webkit-text-stroke: 2px var(--secondary);
     transform: scale(1.025);
 }
 
@@ -1228,7 +1230,7 @@ a:focus {
     }
 
     .section-header h2 {
-        font-size: 30px;
+        font-size: 22px;
         -webkit-text-stroke: 1px var(--secondary);
         text-stroke: 1px var(--secondary);
     }
