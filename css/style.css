@@ -49,10 +49,15 @@ body.ltr .page-header p,
 body.rtl .page-header p,
 body.ltr .page-header div, 
 body.rtl .page-header div,
-body.ltr .blog .blog-meta 
-body.rtl .blog .blog-meta 
-{
+body.ltr .blog .blog-meta,
+body.rtl .blog .blog-meta{
     text-align: center !important;
+}
+
+body.ltr .carousel .carousel-indicators,
+body.rtl .carousel .carousel-indicators{
+    text-align: center !important;
+    direction: ltr;
 }
 
 body.ltr .footer h2::after {
@@ -210,6 +215,64 @@ a:focus {
     margin: 0 auto;
     background: #ffffff;
 }
+
+
+.arrows-container {
+    position: absolute;
+    bottom: 10vh;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.arrows {
+    width: 50px;
+    height: auto;
+    overflow: visible;
+}
+
+.arrows path {
+    stroke: var(--primary);
+    fill: transparent;
+    stroke-width: 5px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: arrow 2s infinite;
+    opacity: 0;
+}
+
+@keyframes arrow {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    40% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+    80% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+.arrows path.a1 {
+    animation-delay: -1s;
+}
+.arrows path.a2 {
+    animation-delay: -0.5s;
+}
+.arrows path.a3 {
+    animation-delay: 0s;
+}
+
 
 .back-to-top {
     position: fixed;
