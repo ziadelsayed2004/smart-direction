@@ -1,6 +1,10 @@
 :root {
   --primary: #00AEEF;
-  --primary-transparent: rgba(0, 175, 239, 0.5);
+  --primary-transparent-l1: rgba(0, 175, 239, 0.5);
+  --primary-transparent-l2: rgba(0, 175, 239, 0.4);
+  --primary-transparent-l3: rgba(0, 175, 239, 0.3);
+  --primary-transparent-l4: rgba(0, 175, 239, 0.2);
+  --primary-transparent-l5: rgba(0, 175, 239, 0.1);
   --secondary: #F7931E;
   --accent: #263238;
   --background: var(--white);
@@ -661,8 +665,7 @@ a:focus {
     .nav-bar .navbar {
         justify-content: space-between;
         padding: 7.5px 15px;
-        background: var(--white) !important;
-        border: 2.5px solid var(--primary-transparent);
+        background: linear-gradient(to top, var(--primary-transparent-l1) ,var(--primary-transparent-l2), var(--primary-transparent-l3), var(--primary-transparent-l4), var(--primary-transparent-l5), var(--white)) !important;
     }
     
     .bar {
@@ -670,7 +673,7 @@ a:focus {
         position: absolute;
         width: 100%;
         height: 4px;
-        background-color: var(--secondary);
+        background-color: var(--accent);
         transition: transform 0.5s ease-in-out, top 0.5s ease-in-out, bottom 0.5s ease-in-out;
         border-radius: 3px;
     }
@@ -678,19 +681,19 @@ a:focus {
     .navbar-toggler.active .bar1 {
         transform: rotate(45deg);
         top: 10px;
-        background-color: var(--accent);
+        background-color: var(--secondary);
     }
     
     .navbar-toggler.active .bar2 {
         transform: rotate(-45deg);
         bottom: 10px;
-        background-color: var(--accent);
+        background-color: var(--secondary);
     }
 
     .nav-bar a.nav-link {
         padding: 8px 8px;
         font-size: 1rem;
-        color: var(--primary) !important;
+        color: var(--accent) !important;
     }
     
     .nav-bar .navbar-nav .nav-link::after {
