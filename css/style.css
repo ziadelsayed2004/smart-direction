@@ -32,6 +32,16 @@ body.rtl div:not(.section-header *,.footer-social a) {
   direction: rtl;
 }
 
+body.ltr .carousel .carousel-caption{
+    text-align: left;
+    direction: ltr;
+}
+
+body.rtl .carousel .carousel-caption{
+    text-align: right;
+    direction: rtl;  
+}
+
 body.ltr .page-header a, 
 body.rtl .page-header a,
 body.ltr .page-header p, 
@@ -605,7 +615,7 @@ a:focus {
     position: relative;
     width: 97.5%;
     border-radius: var(--border-radius);
-    height: calc(100vh - 250px);
+    height: calc(100dvh - 250px);
     min-height: 400px;
     margin: 0 auto;
     text-align: center;
@@ -651,7 +661,7 @@ a:focus {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: calc(100vh - 250px);
+    height: calc(100dvh - 250px);
     min-height: 400px;
     z-index: 2;
 }
@@ -753,10 +763,11 @@ a:focus {
 @media (max-width: 991.98px) {
     .carousel {
         width: 92.5%;
-        height: calc(100vh - 275px);
+        height: calc(100dvh - 250px);
+        margin-bottom: 10px;
     }
     .carousel .carousel-caption{
-        height: calc(100vh - 275px);
+        height: calc(100dvh - 250px);
     }
 }
 
