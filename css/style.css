@@ -172,7 +172,7 @@ div:focus{
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, var(--primary), var(--secondary));
     border-radius: var(--border-radius);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.5s ease-in-out, transform 0.2s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(45deg, var(--secondary), var(--primary));
@@ -522,7 +522,7 @@ a:focus {
     width: 100%;
     height: 4px;
     background-color: #fff;
-    transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+    transition: transform 0.5s ease-in-out, top 0.5s ease-in-out, bottom 0.5s ease-in-out;
     border-radius: 3px;
 }
 
@@ -884,8 +884,26 @@ a:focus {
     position: relative;
     margin-bottom: 45px;
     padding: 90px 0;
+    border-radius: var(--border-radius);
+    width: 97.5%;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    animation: backgroundShift 15s ease-in-out infinite;
 }
 
 .page-header h2 {
@@ -895,6 +913,14 @@ a:focus {
     font-weight: 700;
     margin-bottom: 20px;
     padding-bottom: 5px;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.5s ease-in-out;
+}
+
+.page-header h2:hover {
+    transform: translateY(-3px);
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
 }
 
 .page-header h2::after {
@@ -902,9 +928,14 @@ a:focus {
     content: "";
     width: 100px;
     height: 2px;
-    left: calc(50% - 50px);
+    left: calc(50% - 75px);
     bottom: 0;
-    background: var(--accent);
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--accent), 
+        transparent
+    );
+    animation: lineWidth 2s ease-in-out infinite;
 }
 
 .page-header a {
@@ -912,10 +943,13 @@ a:focus {
     padding: 0 12px;
     font-size: 22px;
     color: var(--accent);
+    z-index: 2;
+    transition: all 0.5s ease-in-out;
 }
 
 .page-header a:hover {
     color: #ffffff;
+    transform: translateY(-2px);
 }
 
 .page-header a::after {
@@ -926,10 +960,61 @@ a:focus {
     right: -7px;
     text-align: center;
     color: var(--accent);
+    transition: all 0.5s ease-in-out;
+}
+
+.page-header a:hover::after {
+    color: #ffffff;
 }
 
 .page-header a:last-child::after {
     display: none;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(255,255,255,0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page-header:hover::after {
+    opacity: 1;
+}
+
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes lineWidth {
+    0% {
+        width: 100px;
+        opacity: 0.5;
+    }
+    50% {
+        width: 150px;
+        opacity: 1;
+    }
+    100% {
+        width: 100px;
+        opacity: 0.5;
+    }
 }
 
 @media (max-width: 991.98px) {
@@ -958,6 +1043,11 @@ a:focus {
     .page-header a {
         font-size: 18px;
     }
+
+    .page-header h2::after {
+        width: 80px;
+        left: calc(50% - 40px);
+    }
 }
 
 
@@ -968,6 +1058,8 @@ a:focus {
     position: relative;
     width: 100%;
     margin-bottom: 45px;
+    padding: 20px 0;
+    overflow: hidden;
 }
 
 .section-header p {
@@ -975,6 +1067,13 @@ a:focus {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+    background: var(--background);
+    z-index: 2;
 }
 
 .section-header h2 {
@@ -989,20 +1088,104 @@ a:focus {
     color: transparent;
     -webkit-text-stroke: 2px var(--secondary);
     text-stroke: 2px var(--secondary);
-    background: linear-gradient(90deg, var(--primary), var(--primary));
+    background: linear-gradient(90deg, 
+        var(--primary) 0%, 
+        var(--secondary) 50%, 
+        var(--primary) 100%
+    );
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
-    text-shadow: 2px 2px 8px rgba(0,174,239,0.15), 0 2px 12px var(--primary);
+    animation: shine 3s linear infinite;
+    text-shadow: 
+        2px 2px 8px rgba(0,174,239,0.15),
+        0 2px 12px var(--primary),
+        0 0 20px rgba(0,174,239,0.1);
+    transform: perspective(500px) rotateX(2deg);
+    transition: all 0.5s ease-in-out;
 }
 
-.section-header h2::after {
-    content: none;
+.section-header h2:hover:not(.about .section-header h2) {
+    letter-spacing: 2px;
+    transform: perspective(500px) rotateX(0deg) scale(1.1);
+    text-shadow: 
+        2px 2px 8px rgba(0,174,239,0.25),
+        0 2px 12px var(--primary),
+        0 0 30px rgba(0,174,239,0.2);
 }
 
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Decorative elements */
+.section-header::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--primary), 
+        transparent
+    );
+    opacity: 0.5;
+}
+
+.about .section-header::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--primary), 
+        transparent
+    );
+    opacity: 0.5;
+}
+
+/* Responsive styles */
 @media (max-width: 767.98px) {
+    .section-header {
+        margin-bottom: 30px;
+        padding: 15px 0;
+    }
+
     .section-header h2 {
         font-size: 30px;
+        -webkit-text-stroke: 1px var(--secondary);
+        text-stroke: 1px var(--secondary);
     }
+
+    .section-header p {
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+}
+
+/* Add subtle animation on page load */
+@keyframes headerReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-header {
+    animation: headerReveal 0.8s ease-out forwards;
 }
 
 
