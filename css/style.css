@@ -1598,7 +1598,7 @@ body.rtl .fact .fact-right{
 
 .service .service-img img {
     width: 100%;
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
     transition: transform 0.5s ease;
 }
 
@@ -1613,7 +1613,7 @@ body.rtl .fact .fact-right{
     top: 0;
     left: 0;
     padding: 30px;
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1792,9 +1792,11 @@ body.rtl .fact .fact-right{
 /*******************************/
 .video {
     position: relative;
-    margin: 45px 0;
+    margin: 45px auto;
     height: 100%;
     min-height: 500px;
+    width: 97.5%;
+    border-radius: var(--border-radius);
     background: linear-gradient(rgba(3, 15, 39, .9), rgba(3, 15, 39, .9)), url(../img/video/cover.jpg);
     background-attachment: fixed;
     background-position: center;
@@ -1962,7 +1964,7 @@ body.rtl .fact .fact-right{
 
 .faqs .card-header [data-toggle="collapse"][aria-expanded="true"] {
     background: var(--primary);
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
 }
 
 .faqs .card-header [data-toggle="collapse"]:after {
@@ -2023,18 +2025,18 @@ body.rtl .fact .fact-right{
 .blog .blog-img {
     position: relative;
     overflow: hidden;
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
     transition: all 0.5s ease-in-out;
 }
 
 .blog .blog-img img {
     width: 100%;
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
     transition: all 0.5s ease-in-out;
 }
 
 .blog .blog-item:hover .blog-img img {
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
     transform: scale(1.1);
 }
 
@@ -2449,17 +2451,17 @@ body.rtl .fact .fact-right{
 .portfolio .portfolio-img {
     position: relative;
     overflow: hidden;
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
 }
 
 .portfolio .portfolio-img img {
     width: 100%;
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
     transition: transform 0.5s ease-in-out;
 }
 
 .portfolio .portfolio-warp:hover .portfolio-img img {    
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
     transform: scale(1.1);
 }
 
@@ -2470,7 +2472,7 @@ body.rtl .fact .fact-right{
     top: 0;
     left: 0;
     padding: 30px;
-    border-radius: 25px 25px 0 0;
+    border-radius: 16px 16px 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
