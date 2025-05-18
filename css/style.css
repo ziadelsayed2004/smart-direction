@@ -2841,7 +2841,7 @@ body.rtl .fact .fact-right{
     padding-top: 90px;
     background: linear-gradient(135deg, var(--accent), #1a2529);
     color: var(--white);
-    padding-bottom: 10vh;
+    padding-bottom: 7.5vh;
 }
 
 .footer .row {
