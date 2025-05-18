@@ -3078,6 +3078,7 @@ body.rtl .fact .fact-right{
 
 @media (max-width: 767px) {
     .footer {
+        padding-bottom: 5vh;
         display: flex;
         flex-direction: column;
         align-items: center;
