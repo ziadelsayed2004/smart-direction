@@ -113,7 +113,7 @@
         let lastScrollY = window.scrollY;
         let animationFrame;
         
-        function animateNavBar(targetY, startY, duration = 600) {
+        function animateNavBar(targetY, startY, duration = 400) {
             const startTime = performance.now();
             
             function updateNavBar(currentTime) {
@@ -140,7 +140,10 @@
             animationFrame = requestAnimationFrame(updateNavBar);
         }
         
-        if (window.scrollY > 120) {
+        // Check window width and set appropriate scroll threshold
+        const scrollThreshold = window.innerWidth <= 991.98 ? 100 : 120;
+        
+        if (window.scrollY > scrollThreshold) {
             navBar.classList.add('nav-sticky');
             animateNavBar(0, -10);
             navBar.style.opacity = '1';
@@ -148,7 +151,7 @@
         } else {
             navBar.classList.remove('nav-sticky');
             
-            if (window.scrollY === 0 || window.scrollY <= 120) {
+            if (window.scrollY === 0 || window.scrollY <= scrollThreshold) {
                 const currentY = parseInt(navBar.style.transform.replace('translateY(', '').replace('px)', '')) || 0;
                 animateNavBar(0, currentY);
                 navBar.style.opacity = '1';
@@ -159,10 +162,10 @@
                 navBar.style.opacity = '0';
                 
                 setTimeout(() => {
-                    if (window.scrollY > 0 && window.scrollY <= 120) {
+                    if (window.scrollY > 0 && window.scrollY <= scrollThreshold) {
                         navBar.style.visibility = 'hidden';
                     }
-                }, 600);
+                }, 400);
             }
         }
         

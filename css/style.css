@@ -286,7 +286,7 @@ a:focus {
     font-size: 30px;
     align-content: center;
     right: 2.5%;
-    bottom: 135px;
+    bottom: 2.5vw;
     z-index: 9;
     border-radius: 50%;
     transition: all 0.5s ease-in-out;
@@ -295,7 +295,7 @@ a:focus {
 
 @media (max-width: 991.98px) {
     .back-to-top {
-        bottom: 110px;
+        bottom: 4.5vw;
         right: 4.5%;
     }
 }
@@ -487,10 +487,35 @@ a:focus {
 
 .nav-bar.nav-sticky {
     position: fixed;
-    bottom: 0;
+    top: 0;
     width: 100%;
     border-radius: var(--border-radius);
     z-index: 999;
+}
+.nav-bar .navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-brand{
+    width: 40%;
+    height: 65px;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-brand .logo{
+    width: 100%;
+    height: 100%;
+    max-height: 65px;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-brand img{
+    height: 100%;
+    scale: 1.5;
 }
 
 .nav-bar .navbar {
@@ -628,8 +653,13 @@ a:focus {
         margin-top: 15px;
     }
 
+    .top-bar{
+        display: none;
+    }
+
     .nav-bar .navbar {
-        padding: 15px;
+        justify-content: space-between;
+        padding: 7.5px 15px;
     }
     
     .nav-bar a.nav-link {
@@ -1082,7 +1112,6 @@ a:focus {
     font-size: 50px;
     font-weight: 800;
     font-style: italic;
-    letter-spacing: 2px;
     z-index: 1;
     overflow: visible;
     color: transparent;
@@ -1101,13 +1130,12 @@ a:focus {
         2px 2px 8px rgba(0,174,239,0.15),
         0 2px 12px var(--primary),
         0 0 20px rgba(0,174,239,0.1);
-    transform: perspective(500px) rotateX(2deg);
+    transform: scale(1);
     transition: all 0.5s ease-in-out;
 }
 
 .section-header h2:hover:not(.about .section-header h2) {
-    letter-spacing: 2px;
-    transform: perspective(500px) rotateX(0deg) scale(1.1);
+    transform: scale(1.05);
     text-shadow: 
         2px 2px 8px rgba(0,174,239,0.25),
         0 2px 12px var(--primary),
@@ -1116,11 +1144,10 @@ a:focus {
 
 @keyframes shine {
     to {
-        background-position: 200% center;
+        background-position: 100% center;
     }
 }
 
-/* Decorative elements */
 .section-header::after{
     content: '';
     position: absolute;
@@ -1153,7 +1180,6 @@ a:focus {
     opacity: 0.5;
 }
 
-/* Responsive styles */
 @media (max-width: 767.98px) {
     .section-header {
         margin-bottom: 30px;
@@ -2649,14 +2675,13 @@ body.rtl .fact .fact-right{
     .col-md-6:last-child
      {
         border-radius: 25px !important;
-        margin: 0 1vw 1vh 1vw;
+        margin: 0 1vw 1vh 1vw !important;
     }
 }
 
 .contact .contact-info {
     position: relative;
     width: 100%;
-    padding: 0 15px;
 }
 
 .contact .contact-item {
@@ -2774,7 +2799,7 @@ body.rtl .fact .fact-right{
     padding-top: 90px;
     background: linear-gradient(135deg, var(--accent), #1a2529);
     color: var(--white);
-    padding-bottom: 120px;
+    padding-bottom: 5vh;
 }
 
 .footer .row {
