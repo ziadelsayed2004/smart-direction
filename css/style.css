@@ -2841,29 +2841,12 @@ body.rtl .fact .fact-right{
     padding-top: 90px;
     background: linear-gradient(135deg, var(--accent), #1a2529);
     color: var(--white);
-    padding-bottom: 5vh;
+    padding-bottom: 10vh;
 }
 
 .footer .row {
     justify-content: center;
     align-items: center;
-}
-
-.footer .footer-logo {
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.footer .footer-logo img {
-    max-width: 180px;
-    height: auto;
-    filter: brightness(0) invert(1);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.footer .footer-logo:hover img {
-    transform: scale(1.025);
-    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.5));
 }
 
 .footer .footer-contact,
@@ -3074,7 +3057,13 @@ body.rtl .fact .fact-right{
     text-decoration: underline;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991.98px) {
+    .footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .footer .copyright p,
     .footer .copyright .col-md-6:last-child p {
         margin: 5px 0;
@@ -3087,18 +3076,18 @@ body.rtl .fact .fact-right{
     }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 767px) {
     .footer {
-        padding-bottom: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .footer .footer-menu{
         margin: 0 15px 0px 15px;
-        width: calc(100% - 30px);
     }
     .footer .copyright {
         margin: 15px;
-        width: calc(100% - 30px);
     }
 }
 
