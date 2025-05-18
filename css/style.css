@@ -3085,8 +3085,10 @@ body.rtl .fact .fact-right{
 
     .footer .footer-menu{
         margin: 0 15px 0px 15px;
+        width: calc(100% - 30px);
     }
     .footer .copyright {
+        width: calc(100% - 30px);
         margin: 15px;
     }
 }
