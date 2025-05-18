@@ -1,10 +1,10 @@
 :root {
   --primary: #00AEEF;
-  --primary-transparent-l1: rgba(0, 175, 239, 0.5);
-  --primary-transparent-l2: rgba(0, 175, 239, 0.4);
-  --primary-transparent-l3: rgba(0, 175, 239, 0.3);
-  --primary-transparent-l4: rgba(0, 175, 239, 0.2);
-  --primary-transparent-l5: rgba(0, 175, 239, 0.1);
+  --primary-transparent-l1: rgba(0, 175, 239, 0.25);
+  --primary-transparent-l2: rgba(0, 175, 239, 0.20);
+  --primary-transparent-l3: rgba(0, 175, 239, 0.15);
+  --primary-transparent-l4: rgba(0, 175, 239, 0.10);
+  --primary-transparent-l5: rgba(0, 175, 239, 0.05);
   --secondary: #F7931E;
   --accent: #263238;
   --background: var(--white);
