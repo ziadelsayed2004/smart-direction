@@ -108,12 +108,12 @@
         if (!navBar) return;
         
         // Add transition properties to nav-bar with smoother timing
-        navBar.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        navBar.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
         
         let lastScrollY = window.scrollY;
         let animationFrame;
         
-        function animateNavBar(targetY, startY, duration = 400) {
+        function animateNavBar(targetY, startY, duration = 300) {
             const startTime = performance.now();
             
             function updateNavBar(currentTime) {
@@ -122,7 +122,7 @@
                 
                 // Smoother easing function for natural animation
                 const easeProgress = progress < 0.5
-                    ? 3 * progress * progress * progress
+                    ? 4 * progress * progress * progress
                     : 1 - Math.pow(-2 * progress + 2, 3) / 2;
                 
                 const currentY = startY + (targetY - startY) * easeProgress;
@@ -144,12 +144,33 @@
         const scrollThreshold = window.innerWidth <= 991.98 ? 100 : 120;
         
         if (window.scrollY > scrollThreshold) {
+            // Create a spacer div if it doesn't exist
+            let spacer = document.querySelector('.nav-spacer');
+            if (!spacer) {
+                spacer = document.createElement('div');
+                spacer.className = 'nav-spacer';
+                spacer.style.height = navBar.offsetHeight + 'px';
+                spacer.style.transition = 'height 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                navBar.parentNode.insertBefore(spacer, navBar.nextSibling);
+            }
+            
             navBar.classList.add('nav-sticky');
             animateNavBar(0, -10);
             navBar.style.opacity = '1';
             navBar.style.visibility = 'visible';
         } else {
             navBar.classList.remove('nav-sticky');
+            
+            // Remove spacer when nav is not sticky
+            const spacer = document.querySelector('.nav-spacer');
+            if (spacer) {
+                spacer.style.height = '0';
+                setTimeout(() => {
+                    if (spacer && spacer.parentNode) {
+                        spacer.parentNode.removeChild(spacer);
+                    }
+                }, 300);
+            }
             
             if (window.scrollY === 0 || window.scrollY <= scrollThreshold) {
                 const currentY = parseInt(navBar.style.transform.replace('translateY(', '').replace('px)', '')) || 0;
@@ -165,7 +186,7 @@
                     if (window.scrollY > 0 && window.scrollY <= scrollThreshold) {
                         navBar.style.visibility = 'hidden';
                     }
-                }, 400);
+                }, 300);
             }
         }
         
