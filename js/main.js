@@ -575,10 +575,20 @@ $('.service-item').each(function() {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    const usableHeight = window.innerHeight - 250;
-    document.documentElement.style.setProperty('--carousel-height', usableHeight + 'px');
-});
+    // Function to calculate and set carousel height
+    function setCarouselHeight() {
+        const isMobile = window.innerWidth <= 991.98;
+        const heightReduction = isMobile ? 120 : 250;
+        const usableHeight = window.innerHeight - heightReduction;
+        document.documentElement.style.setProperty('--carousel-height', usableHeight + 'px');
+    }
 
+    // Set initial height
+    setCarouselHeight();
+
+    // Update height on window resize
+    window.addEventListener('resize', setCarouselHeight);
+});
 
 // Isolated Preloader
 $(document).ready(function() {

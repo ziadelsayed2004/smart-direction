@@ -278,6 +278,14 @@ a:focus {
     animation-delay: 0s;
 }
 
+@media (max-width: 991.98px) {
+    .arrows {
+        width: 30px;
+    }
+    .arrows path {
+        stroke-width: 3px;
+    }
+}
 
 .back-to-top {
     position: fixed;
