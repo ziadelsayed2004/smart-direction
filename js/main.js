@@ -573,7 +573,7 @@ $('.service-item').each(function() {
 
 window.addEventListener('DOMContentLoaded', () => {
     const usableHeight = window.innerHeight - 250;
-    document.documentElement.style.setProperty('--safe-height', usableHeight + 'px');
+    document.documentElement.style.setProperty('--carousel-height', usableHeight + 'px');
 });
 
 
