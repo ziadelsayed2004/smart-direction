@@ -157,7 +157,7 @@ div:focus{
 .lang-toggle:hover {
   background-color: #0077a6;
   color: var(--secondary);
-  transform: scale(1.05);
+  transform: scale(1.025);
 }
 
 .lang-toggle .lang-text {
@@ -347,7 +347,7 @@ a:focus {
 .button:hover, .btn:hover {
     background: var(--primary);
     color: var(--accent);
-    transform: scale(1.05);
+    transform: scale(1.025);
     font-size: 1rem;
 }
 
@@ -398,7 +398,7 @@ a:focus {
 }
 
 .top-bar .top-bar-item:hover .top-bar-icon {
-    transform: scale(1.05) rotate(7.5deg);
+    transform: scale(1.025) rotate(7.5deg);
 }
 
 .top-bar .top-bar-icon [class^="flaticon-"]::before {
@@ -856,7 +856,7 @@ a:focus {
     color: var(--accent);
     background: var(--primary);
     border: 2px solid #ffffff;
-    scale: 1.05;
+    scale: 1.025;
 }
 
 .carousel .carousel-control-prev,
@@ -880,7 +880,7 @@ a:focus {
 .carousel .carousel-control-prev:hover,
 .carousel .carousel-control-next:hover {
     background: var(--primary);
-    scale: 1.05;
+    scale: 1.025;
 }
 
 .carousel .carousel-indicators {
@@ -1157,7 +1157,7 @@ a:focus {
     margin: 0;
     position: relative;
     font-size: 50px;
-    font-weight: 800;
+    font-weight: bold;
     font-style: italic;
     z-index: 1;
     overflow: visible;
@@ -1176,7 +1176,9 @@ a:focus {
 }
 
 .section-header h2:hover:not(.about .section-header h2) {
-    transform: scale(1.05);
+    font-weight: bold;
+    -webkit-text-stroke: 2px var(--secondary);
+    transform: scale(1.025);
 }
 
 .section-header::after{
@@ -2850,7 +2852,7 @@ body.rtl .fact .fact-right{
 }
 
 .footer .footer-logo:hover img {
-    transform: scale(1.05);
+    transform: scale(1.025);
     filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.5));
 }
 
