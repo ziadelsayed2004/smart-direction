@@ -570,6 +570,13 @@ $('.service-item').each(function() {
     });
 }
 
+
+window.addEventListener('DOMContentLoaded', () => {
+    const usableHeight = window.innerHeight - 250;
+    document.documentElement.style.setProperty('--safe-height', usableHeight + 'px');
+});
+
+
 // Isolated Preloader
 $(document).ready(function() {
     const preloader = document.getElementById('preloader');
