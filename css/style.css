@@ -616,7 +616,7 @@ a:focus {
     position: relative;
     width: 97.5%;
     border-radius: var(--border-radius);
-    height: calc(var(--carousel-height) - 250px);
+    height: var(--carousel-height);
     min-height: 400px;
     margin: 0 auto;
     text-align: center;
@@ -662,7 +662,7 @@ a:focus {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: calc(var(--carousel-height) - 250px);
+    height: var(--carousel-height);
     min-height: 400px;
     z-index: 2;
 }
@@ -764,11 +764,11 @@ a:focus {
 @media (max-width: 991.98px) {
     .carousel {
         width: 92.5%;
-        height: calc(var(--carousel-height) - 250px);
+        height: var(--carousel-height);
         margin-bottom: 10px;
     }
     .carousel .carousel-caption{
-        height: calc(var(--carousel-height) - 250px);
+        height: var(--carousel-height);
     }
 }
 
