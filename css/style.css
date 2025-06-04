@@ -1231,8 +1231,7 @@ a:focus {
 
     .section-header h2 {
         font-size: 22px;
-        -webkit-text-stroke: 1px var(--secondary);
-        text-stroke: 1px var(--secondary);
+        -webkit-text-stroke: 0.5px var(--secondary);
     }
 
     .section-header p {
