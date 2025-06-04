@@ -1344,15 +1344,16 @@ a:focus {
 
 .feature .feature-icon {
     position: relative;
-    width: 60px;
+    width: 70%;
+    padding-left: 0.5%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     transition: all 0.4s ease-in-out;
 }
 
 .feature .col-md-12:hover .feature-icon {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.05) rotate(5deg);
 }
 
 .feature .feature-icon::before {
