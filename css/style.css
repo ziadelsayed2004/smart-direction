@@ -1344,7 +1344,7 @@ a:focus {
 
 .feature .feature-icon {
     position: relative;
-    width: 70%;
+    width: 70px;
     padding-left: 0.5%;
     display: flex;
     align-items: center;
