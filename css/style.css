@@ -1288,17 +1288,46 @@ a:focus {
 }
 
 .feature .col-md-12 {
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, #1a2529 100%);
     border-radius: var(--border-radius);
     margin-bottom: 15px;
     height: max-content;
     box-shadow: 0 2px 16px rgba(0,0,0,0.07);
     overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    position: relative;
+}
+
+.feature .col-md-12::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(255,255,255,0.05) 50%, 
+        rgba(255,255,255,0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.feature .col-md-12:hover::before {
+    opacity: 1;
+}
+
+.feature .col-md-12:nth-child(1n) {
+    background: linear-gradient(135deg, var(--primary) 0%, #0077a6 100%);
 }
 
 .feature .col-md-12:nth-child(2n) {
-    color: var(--accent);
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--accent) 0%, #1a2529 100%);
+}
+
+.feature .col-md-12:nth-child(3n) {
+    background: linear-gradient(135deg, var(--secondary) 0%, #c57618 100%);
 }
 
 .feature .feature-item {
@@ -1319,44 +1348,70 @@ a:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.4s ease-in-out;
+}
+
+.feature .col-md-12:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .feature .feature-icon::before {
     position: absolute;
     content: "";
-    width: 80px;
-    height: 80px;
-    top: -20px;
-    left: -10px;
-    border: 2px dotted #ffffff;
+    width: 95px;
+    height: 95px;
+    top: -15px;
+    left: -17.5px;
+    border: 2px dotted rgba(255,255,255,0.5);
     border-radius: calc(var(--border-radius) * 3.75);
     z-index: 1;
+    animation: rotate 15s linear infinite;
+    transition: all 0.4s ease-in-out;
+}
+
+.feature .col-md-12:hover .feature-icon::before {
+    border-color: rgba(255,255,255,0.8);
+    animation-duration: 4s;
+    transform: scale(1.05);
 }
 
 .feature .feature-icon::after {
     position: absolute;
     content: "";
-    width: 79px;
-    height: 79px;
-    top: -18px;
-    left: -9px;
-    background: var(--accent);
+    width: 90px;
+    height: 90px;
+    top: -12.5px;
+    left: -15px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
     border-radius: calc(var(--border-radius) * 3.75);
     z-index: 2;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 0 0 0 rgba(255,255,255,0.1);
 }
 
-.feature .col-md-12:nth-child(2n) .feature-icon::after {
-    background: var(--primary);
+.feature .col-md-12:hover .feature-icon::after {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.15);
 }
 
 .feature .feature-icon [class^="flaticon-"]::before,
 .feature .feature-icon [class^="fas fa-"]::before {
     position: relative;
     margin: 0;
-    color: var(--primary);
-    font-size: 60px;
-    line-height: 60px;
+    color: var(--white);
+    font-size: 55px;
+    line-height: 70px;
     z-index: 3;
+    transition: all 0.4s ease-in-out;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.feature .col-md-12:hover .feature-icon [class^="flaticon-"]::before,
+.feature .col-md-12:hover .feature-icon [class^="fas fa-"]::before {
+    transform: scale(1.05) rotate(5deg);
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 }
 
 .feature .feature-text {
@@ -1365,23 +1420,49 @@ a:focus {
 
 .feature .feature-text h3 {
     margin: 0 0 10px 0;
-    color: var(--primary);
+    color: var(--white);
     font-size: 25px;
     font-weight: 600;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .feature .feature-text p {
     margin: 0;
-    color: var(--primary);
+    color: rgba(255,255,255,0.9);
     font-size: 18px;
     font-weight: 400;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.feature .col-md-12:nth-child(2n) [class^="flaticon-"]::before,
-.feature .col-md-12:nth-child(2n) [class^="fas fa-"]::before,
-.feature .col-md-12:nth-child(2n) h3,
-.feature .col-md-12:nth-child(2n) p {
-    color: var(--accent);
+.feature .feature-text h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--white);
+    transition: width 0.4s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.feature .col-md-12:hover .feature-text h3::after {
+    width: 100%;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.05);
+    }
+    to {
+        transform: rotate(360deg) scale(1);
+    }
 }
 
 
@@ -1392,6 +1473,10 @@ a:focus {
     position: relative;
     width: 100%;
     padding: 45px 0;
+}
+
+.about h2 {
+    font-size: 40px;
 }
 
 .about .section-header {
