@@ -1230,7 +1230,7 @@ a:focus {
     }
 
     .section-header h2 {
-        font-size: 22px;
+        font-size: 27px;
         -webkit-text-stroke: 0.5px var(--secondary);
     }
 
@@ -1481,7 +1481,7 @@ a:focus {
 
 @media (max-width: 767.98px) {
     .about h2 {
-        font-size: 18px;
+        font-size: 25px;
     }
 }
 
